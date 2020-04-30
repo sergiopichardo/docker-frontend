@@ -6,10 +6,17 @@ build:
 	docker build -f Dockerfile.dev -t $(IMAGE_NAME) .
 
 run: 
-	docker run -it -p $(PORT_MAPPING) --rm --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	docker run -it -p $(PORT_MAPPING) \
+	--rm --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 volume: 
-	docker run -it -p $(PORT_MAPPING) --rm --name $(CONTAINER_NAME) -v /app/node_modules -v $(PWD):/app $(IMAGE_NAME)
+	docker run -it -p $(PORT_MAPPING) \
+	--rm --name $(CONTAINER_NAME) \
+	-v /app/node_modules \
+	-v $(PWD):/app $(IMAGE_NAME) 
 
-inspect: 
+shell: 
 	docker exec -it $(CONTAINER_NAME) sh 
+
+clean: 
+	docker volume prune
