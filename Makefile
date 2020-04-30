@@ -19,4 +19,13 @@ shell:
 	docker exec -it $(CONTAINER_NAME) sh 
 
 clean: 
-	docker volume prune
+	docker system prune
+
+dc-build: 
+	docker-compose up --build 
+
+dc-up: 
+	docker-compose up 
+	
+dc-down: 
+	docker-compose down 
